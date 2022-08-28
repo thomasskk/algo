@@ -10,27 +10,31 @@
  */
 
 const swap = (arr, i, j) => {
-  const newArray = [...arr];
+  const newArray = [...arr]
 
-  [newArray[i], newArray[j]] = [newArray[j], newArray[i]] // Swapping elements ES6 way
+  ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
 
   return newArray
 }
 
-const permutations = arr => {
+const permutations = (arr) => {
   const P = []
-  const permute = (arr, low, high) => {
+  const high = arr.length - 1
+
+  const permute = (low, arr) => {
     if (low === high) {
       P.push([...arr])
       return P
     }
+
     for (let i = low; i <= high; i++) {
       arr = swap(arr, low, i)
-      permute(arr, low + 1, high)
+      permute(low + 1, arr)
     }
+
     return P
   }
-  return permute(arr, 0, arr.length - 1)
+  return permute(0, arr)
 }
 
 export { permutations }
